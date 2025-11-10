@@ -51,14 +51,19 @@ const fallbackApiUrl = buildUrl(detectedProtocol, detectedHost, envApiPort);
 
 export const API_BASE_URL = stripTrailingSlash(envApiUrl || fallbackApiUrl);
 
+// Debug: print resolved API and WS URLs at runtime in development to help diagnose connection issues
+if (process.env.NODE_ENV === 'development') {
+  // eslint-disable-next-line no-console
+  console.log('[config] API_BASE_URL =', API_BASE_URL);
+}
 const envWsUrl = trimValue(process.env.REACT_APP_WS_URL);
 const envWsProtocol =
   ensureProtocol(trimValue(process.env.REACT_APP_WS_PROTOCOL)) ||
   (API_BASE_URL.startsWith('https://') ? 'wss:' : 'ws:');
 const envWsPort = trimValue(
   process.env.REACT_APP_WS_PORT ||
-    process.env.REACT_APP_API_WS_PORT ||
-    process.env.REACT_APP_API_PORT,
+  process.env.REACT_APP_API_WS_PORT ||
+  process.env.REACT_APP_API_PORT,
 ) || envApiPort;
 
 const deriveWsUrlFromHttp = (httpUrl: string) => {
