@@ -1473,6 +1473,44 @@ body {
   cursor: not-allowed;
 }
 
+/* Modal / Quick action form tweaks for Wallet page */
+.modal-input {
+  width: 100%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-default);
+  color: var(--text-primary);
+  padding: 0.75rem 1rem;
+  border-radius: 2px;
+  font-size: 0.95rem;
+  font-family: 'Monaco', monospace;
+}
+
+.modal-actions .generate-btn {
+  background: transparent;
+  border: 1px solid var(--border-default);
+  color: var(--text-primary);
+  padding: 0.75rem 1rem;
+}
+
+.action-message {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 2px;
+  font-weight: 700;
+}
+
+.action-message.success {
+  background: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: var(--accent-green);
+}
+
+.action-message.error {
+  background: rgba(239, 68, 68, 0.06);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
 .info-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -2685,12 +2723,10 @@ body {
   content: "";
   position: fixed;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.65) 0%,
-    rgba(0, 0, 0, 0.85) 45%,
-    rgba(0, 0, 0, 0.95) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(0, 0, 0, 0.65) 0%,
+      rgba(0, 0, 0, 0.85) 45%,
+      rgba(0, 0, 0, 0.95) 100%);
   pointer-events: none;
   z-index: 0;
 }
