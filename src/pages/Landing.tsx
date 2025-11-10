@@ -48,9 +48,6 @@ function Hero({ onLaunch }: { onLaunch: () => void }) {
           <button className="btn-secondary" onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}>
             Read Docs
           </button>
-          <button className="btn-secondary" onClick={onLaunch}>
-            View Demo
-          </button>
         </div>
 
         <div className="hero-stats">
