@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="160" height="160" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-labelledby="title">
+  <title id="title">ShadowChain logo</title>
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur" />
+      <feMerge>
+        <feMergeNode in="coloredBlur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- cyan rounded square with inner notch to hint at 'S' -->
+  <rect x="10" y="10" width="140" height="140" rx="12" ry="12" fill="#00d4ff" filter="url(#glow)" />
+  <path d="M44 40 C70 20, 110 20, 116 52 C122 84, 78 92, 80 118 C82 144, 120 136, 120 136" stroke="#001" stroke-width="6" fill="none" opacity="0.06" />
+  <!-- subtle inner mark -->
+  <path d="M50 60 C70 50, 110 50, 110 78 C110 106, 72 110, 78 132" stroke="#001" stroke-width="6" fill="none" opacity="0.18" />
+</svg>

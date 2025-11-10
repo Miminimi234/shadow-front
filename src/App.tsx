@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { apiPath } from './config';
 import './shadow-theme.css';
+import headerLogo from './assets/shadowlogo.png';
 import Landing from './pages/Landing';
 import Dashboard from './pages/Dashboard';
 import Consensus from './pages/Consensus';
@@ -89,11 +90,7 @@ function App() {
             aria-label="Return to landing page"
           >
             <div className="logo-container">
-              <svg width="40" height="40" viewBox="0 0 100 100">
-                <ellipse cx="50" cy="50" rx="45" ry="30" fill="none" stroke="#00d4ff" strokeWidth="4"/>
-                <circle cx="50" cy="50" r="15" fill="none" stroke="#00d4ff" strokeWidth="4"/>
-                <circle cx="50" cy="50" r="8" fill="#00d4ff"/>
-              </svg>
+              <img src={headerLogo} alt="ShadowChain" className="header-logo" />
             </div>
             <div className="brand-info">
               <h1>SHADOWCHAIN</h1>

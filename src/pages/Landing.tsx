@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import logo from '../assets/shadowlogo.png';
 
 interface LandingProps {
   onLaunch: () => void;
@@ -26,10 +27,10 @@ function Hero({ onLaunch }: { onLaunch: () => void }) {
   return (
     <section className="hero">
       <PoHBackground />
-      
+
       <div className="hero-content">
         <div className="hero-logo">
-          <span className="logo-icon">▪</span>
+          <img src={logo} className="logo-icon" alt="ShadowChain logo" />
           <h1>SHADOWCHAIN</h1>
         </div>
 
@@ -69,7 +70,7 @@ function PoHBackground() {
 
   useEffect(() => {
     const generateHash = () => {
-      return Array.from({ length: 16 }, () => 
+      return Array.from({ length: 16 }, () =>
         Math.floor(Math.random() * 16).toString(16)
       ).join('');
     };
@@ -108,7 +109,7 @@ function Problem() {
     <section className="section problem-section">
       <div className="section-content">
         <h2 className="section-title">THE BLOCKCHAIN TRANSPARENCY PROBLEM</h2>
-        
+
         <div className="problem-grid">
           {problems.map((problem, i) => (
             <div key={i} className="problem-card">
@@ -121,8 +122,8 @@ function Problem() {
 
         <div className="problem-statement">
           <p>
-            Every transaction on Solana, Ethereum, and most blockchains is 
-            <strong> COMPLETELY PUBLIC</strong>. This isn't just inconvenient — 
+            Every transaction on Solana, Ethereum, and most blockchains is
+            <strong> COMPLETELY PUBLIC</strong>. This isn't just inconvenient —
             <strong> it's dangerous</strong>.
           </p>
         </div>
@@ -136,14 +137,14 @@ function Solution() {
     <section className="section solution-section">
       <div className="section-content">
         <h2 className="section-title">SHADOWCHAIN: PRIVACY BY DEFAULT</h2>
-        
+
         <div className="solution-content">
           <div className="solution-text">
             <p className="large-text">
-              We took Solana's blazing-fast architecture and integrated 
+              We took Solana's blazing-fast architecture and integrated
               battle-tested privacy technology.
             </p>
-            
+
             <div className="features-list">
               <div className="feature-item">
                 <span className="feature-icon">✓</span>
@@ -235,7 +236,7 @@ function Features() {
     <section className="section features-section">
       <div className="section-content">
         <h2 className="section-title">CORE FEATURES</h2>
-        
+
         <div className="features-grid">
           {features.map((feature, i) => (
             <div key={i} className="feature-card">
@@ -264,7 +265,7 @@ function HowItWorks() {
         <div className="architecture-grid">
           <div className="architecture-layer">
             <h3>▸ Consensus Layer (Solana)</h3>
-            
+
             <div className="tech-box">
               <h4>Proof of History</h4>
               <div className="tech-description">
@@ -297,7 +298,7 @@ function HowItWorks() {
 
           <div className="architecture-layer">
             <h3>◈ Privacy Layer</h3>
-            
+
             <div className="tech-box">
               <h4>Shielded Pool</h4>
               <div className="tech-description">
@@ -447,7 +448,7 @@ function UseCases() {
     <section className="section use-cases-section">
       <div className="section-content">
         <h2 className="section-title">WHO NEEDS SHADOWCHAIN?</h2>
-        
+
         <div className="use-cases-grid">
           {cases.map((useCase, i) => (
             <div key={i} className="use-case-card">
@@ -600,7 +601,7 @@ function CTA({ onLaunch }: { onLaunch: () => void }) {
     <section className="section cta-section">
       <div className="cta-content">
         <h2>READY TO ENTER THE SHADOWS?</h2>
-        
+
         <div className="cta-buttons">
           <button className="btn-primary large" onClick={onLaunch}>
             LAUNCH APP
@@ -635,7 +636,7 @@ function Footer() {
           <span>▪</span>
           <span>SHADOWCHAIN</span>
         </div>
-        
+
         <div className="footer-links">
           <button type="button" className="link-button">
             Documentation

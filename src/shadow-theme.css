@@ -8,19 +8,19 @@
   --bg-secondary: #0a0a0f;
   --bg-card: #0f0f14;
   --bg-card-hover: #14141a;
-  
+
   --accent-cyan: #00d4ff;
   --accent-purple: #6366f1;
   --accent-green: #10b981;
   --accent-orange: #f59e0b;
-  
+
   --text-primary: #ffffff;
   --text-muted: #a0a0a0;
   --text-dim: #6b7280;
-  
+
   --border-default: #1a1a24;
   --border-accent: #00d4ff;
-  
+
   --glow-cyan: rgba(0, 212, 255, 0.5);
   --header-height: 96px;
 }
@@ -32,6 +32,8 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+
+/* NOTE: refinery font is loaded from public/index.html to avoid webpack resolving public/ files from CSS imports */
 
 body {
   font-family: 'Montserrat', 'Helvetica Neue', 'Arial', sans-serif;
@@ -94,9 +96,25 @@ body {
   animation: pulse-slow 3s ease-in-out infinite;
 }
 
+/* header logo image (replaces the inline svg) */
+.logo-container img.header-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px var(--glow-cyan));
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
 @keyframes pulse-slow {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
 }
 
 .brand-info {
@@ -111,7 +129,7 @@ body {
   color: var(--accent-cyan);
   letter-spacing: 0.2em;
   text-shadow: 0 0 20px var(--glow-cyan);
-  font-family: 'Monaco', 'Courier New', monospace;
+  font-family: 'Refinery', 'Monaco', 'Courier New', monospace;
   line-height: 1;
 }
 
@@ -119,7 +137,7 @@ body {
   font-size: 0.65rem;
   color: var(--text-muted);
   letter-spacing: 0.08em;
-  font-family: 'Monaco', 'Courier New', monospace;
+  font-family: 'Refinery', 'Monaco', 'Courier New', monospace;
   line-height: 1.2;
 }
 
@@ -166,8 +184,17 @@ body {
 }
 
 @keyframes pulse-green {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.2); opacity: 0.7; }
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
 }
 
 .header-right {
@@ -348,7 +375,8 @@ body {
   align-items: center;
 }
 
-.footer-left, .footer-right {
+.footer-left,
+.footer-right {
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -714,7 +742,9 @@ body {
   color: var(--accent-orange);
 }
 
-.tower-bft-section, .slot-production, .validator-preview {
+.tower-bft-section,
+.slot-production,
+.validator-preview {
   background: var(--bg-card);
   border: 1px solid var(--border-default);
   border-radius: 4px;
@@ -722,7 +752,9 @@ body {
   margin-bottom: 2rem;
 }
 
-.tower-bft-section h2, .slot-production h2, .validator-preview h2 {
+.tower-bft-section h2,
+.slot-production h2,
+.validator-preview h2 {
   color: var(--accent-cyan);
   margin-bottom: 1.5rem;
 }
@@ -894,7 +926,9 @@ body {
   color: var(--text-muted);
 }
 
-.merkle-section, .nullifier-section, .sapling-performance {
+.merkle-section,
+.nullifier-section,
+.sapling-performance {
   background: var(--bg-card);
   border: 1px solid var(--border-default);
   border-radius: 4px;
@@ -902,7 +936,9 @@ body {
   margin-bottom: 2rem;
 }
 
-.merkle-section h2, .nullifier-section h2, .sapling-performance h2 {
+.merkle-section h2,
+.nullifier-section h2,
+.sapling-performance h2 {
   color: var(--accent-cyan);
   margin-bottom: 1.5rem;
 }
@@ -1309,7 +1345,8 @@ body {
   width: 100%;
 }
 
-.address-label, .balance-label {
+.address-label,
+.balance-label {
   font-size: 0.75rem;
   color: var(--text-dim);
   margin-bottom: 0.5rem;
@@ -1393,7 +1430,8 @@ body {
   margin-top: 0.5rem;
 }
 
-.quick-actions, .wallet-info-section {
+.quick-actions,
+.wallet-info-section {
   background: var(--bg-card);
   border: 1px solid var(--border-default);
   border-radius: 4px;
@@ -1401,7 +1439,8 @@ body {
   margin-bottom: 2rem;
 }
 
-.quick-actions h2, .wallet-info-section h2 {
+.quick-actions h2,
+.wallet-info-section h2 {
   color: var(--accent-cyan);
   margin-bottom: 1.5rem;
 }
@@ -1613,6 +1652,7 @@ body {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1735,12 +1775,12 @@ body {
   font-size: 0.9rem;
 }
 
-.perf-item > span:first-child {
+.perf-item>span:first-child {
   min-width: 100px;
   color: var(--text-muted);
 }
 
-.perf-item > span:last-child {
+.perf-item>span:last-child {
   min-width: 50px;
   text-align: right;
   color: var(--accent-cyan);
@@ -1786,7 +1826,9 @@ body {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ============================================
@@ -2400,10 +2442,12 @@ body {
    ============================================ */
 
 @media (max-width: 1200px) {
-  .metrics-grid, .consensus-stats-grid {
+
+  .metrics-grid,
+  .consensus-stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .validators-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2436,7 +2480,7 @@ body {
     transition: transform 0.25s ease, opacity 0.2s ease;
   }
 
-  .sidebar.open ~ .main-content::before {
+  .sidebar.open~.main-content::before {
     content: '';
     position: fixed;
     inset: var(--header-height) 0 0 0;
@@ -2444,8 +2488,10 @@ body {
     z-index: 50;
     display: block;
   }
-  
-  .metrics-grid, .content-grid, .wallet-grid {
+
+  .metrics-grid,
+  .content-grid,
+  .wallet-grid {
     grid-template-columns: 1fr;
   }
 
@@ -2628,6 +2674,17 @@ body {
   background: var(--bg-primary);
   color: var(--text-primary);
   overflow-x: hidden;
+  /* use the Refinery font for the landing page when available */
+  font-family: 'Refinery', 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Force Refinery on all landing page text so headings, paragraphs, and
+   other elements that previously used monospace or other fonts inherit it.
+   Placed here (after other rules) so it overrides more specific font rules.
+*/
+.landing,
+.landing * {
+  font-family: 'Refinery', 'Montserrat', 'Helvetica Neue', Arial, sans-serif !important;
 }
 
 /* Hero Section */
@@ -2673,20 +2730,32 @@ body {
 
 .hero-logo {
   margin-bottom: 2rem;
+  /* center logo and heading */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .logo-icon {
-  font-size: 5rem;
+  /* supports both text fallback (span) and image (img) */
   display: block;
-  margin-bottom: 1rem;
+  margin: 0 auto 1rem;
   filter: drop-shadow(0 0 30px var(--glow-cyan));
+  /* image sizing */
+  width: 5rem;
+  height: 5rem;
+  max-width: 100%;
+  object-fit: contain;
+  /* keep font-size for text fallback */
+  font-size: 5rem;
 }
 
 .hero-logo h1 {
   font-size: 4rem;
   font-weight: 700;
   color: var(--accent-cyan);
-  letter-spacing: 0.2em;
+  /* tightened letter spacing for Refinery font */
+  letter-spacing: 0.08em;
   text-shadow: 0 0 40px var(--glow-cyan);
   margin: 0;
   font-family: 'Monaco', monospace;
@@ -2783,8 +2852,15 @@ body {
 }
 
 @keyframes bounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(10px); }
+
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  50% {
+    transform: translateX(-50%) translateY(10px);
+  }
 }
 
 /* Section Styling */
@@ -3597,7 +3673,7 @@ blockquote {
 
   .hero-logo h1 {
     font-size: 2.5rem !important;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.06em;
   }
 
   .logo-icon {
@@ -3734,7 +3810,7 @@ blockquote {
 
   .hero-logo h1 {
     font-size: 2rem !important;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
   }
 
   .hero-tagline {
