@@ -1,4 +1,5 @@
 import logo from '../assets/shadowlogo.png';
+import xLogo from '../assets/X-Logo.png';
 import MatrixText from '../components/matrixbg';
 
 interface LandingProps {
@@ -617,7 +618,26 @@ function Footer() {
         <div className="footer-links">
           <a className="link-button" href="https://github.com/ShadowChainDev/ShadowChain" target="_blank" rel="noopener noreferrer">Documentation</a>
           <a className="link-button" href="https://github.com/ShadowChainDev/ShadowChain" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <button type="button" className="link-button">Twitter</button>
+          {/* X (formerly Twitter) link with image background from assets */}
+          <a
+            className="link-button"
+            href="https://x.com/Shadowchainxyz"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Shadowchainxyz on X"
+            style={{
+              display: 'inline-block',
+              width: 36,
+              height: 36,
+              padding: 6,
+              backgroundImage: `url(${xLogo})`,
+              backgroundSize: 'contain',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+              filter: 'invert(1)',
+              WebkitFilter: 'invert(1)',
+            }}
+          />
         </div>
 
         <div className="footer-bottom">
