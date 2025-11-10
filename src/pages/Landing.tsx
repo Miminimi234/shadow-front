@@ -617,7 +617,6 @@ function Footer() {
         <div className="footer-links">
           <a className="link-button" href="https://github.com/ShadowChainCorp/ShadowChain.git" target="_blank" rel="noopener noreferrer">Documentation</a>
           <a className="link-button" href="https://github.com/ShadowChainCorp/ShadowChain.git" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <button type="button" className="link-button">Discord</button>
           <button type="button" className="link-button">Twitter</button>
         </div>
 
