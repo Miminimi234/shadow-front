@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { apiPath } from './config';
-import './shadow-theme.css';
+import { useEffect, useState } from 'react';
 import headerLogo from './assets/shadowlogo.png';
-import Landing from './pages/Landing';
-import Dashboard from './pages/Dashboard';
-import Consensus from './pages/Consensus';
-import Privacy from './pages/Privacy';
-import Transactions from './pages/Transactions';
-import Wallet from './pages/Wallet';
-import Validators from './pages/Validators';
-import Bridge from './pages/Bridge';
+import { apiPath } from './config';
 import { useChainMetrics } from './hooks/useChainMetrics';
 import { useWebSocket } from './hooks/useWebSocket';
+import Bridge from './pages/Bridge';
+import Consensus from './pages/Consensus';
+import Dashboard from './pages/Dashboard';
+import Landing from './pages/Landing';
+import Privacy from './pages/Privacy';
+import Transactions from './pages/Transactions';
+import Validators from './pages/Validators';
+import Wallet from './pages/Wallet';
+import './shadow-theme.css';
 
 type Page = 'dashboard' | 'consensus' | 'privacy' | 'transactions' | 'wallet' | 'validators' | 'bridge';
 
@@ -98,7 +98,7 @@ function App() {
             </div>
           </button>
         </div>
-        
+
         <div className="header-center">
           <div className="network-badge">
             <span className="status-dot"></span>
@@ -113,11 +113,11 @@ function App() {
           >
             {mobileMenuOpen ? (
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 6l12 12M6 18L18 6" stroke="#00d4ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M6 6l12 12M6 18L18 6" stroke="#00d4ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             ) : (
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 6h18M3 12h18M3 18h18" stroke="#00d4ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M3 6h18M3 12h18M3 18h18" stroke="#00d4ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             )}
           </button>
@@ -235,9 +235,9 @@ function App() {
           <span>Solana PoH + Sapling Privacy</span>
         </div>
         <div className="footer-right">
-          <button 
+          <button
             onClick={() => setCurrentPage('wallet')}
-            style={{background: 'transparent', border: 'none', color: 'var(--accent-cyan)', cursor: 'pointer', textDecoration: 'none'}}
+            style={{ background: 'transparent', border: 'none', color: 'var(--accent-cyan)', cursor: 'pointer', textDecoration: 'none' }}
           >
             Faucet
           </button>
