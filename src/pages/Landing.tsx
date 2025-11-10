@@ -48,9 +48,14 @@ function Hero({ onLaunch }: { onLaunch: () => void }) {
           <button className="btn-primary" onClick={onLaunch}>
             Launch App
           </button>
-          <button className="btn-secondary" onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}>
+          <a
+            className="btn-secondary"
+            href="https://github.com/ShadowChainCorp/ShadowChain"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Read Docs
-          </button>
+          </a>
         </div>
 
         <div className="hero-stats">
@@ -578,12 +583,14 @@ function CTA({ onLaunch }: { onLaunch: () => void }) {
           <button className="btn-primary large" onClick={onLaunch}>
             LAUNCH APP
           </button>
-          <button className="btn-secondary large">
+          <a
+            className="btn-secondary large"
+            href="https://github.com/ShadowChainCorp/ShadowChain"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             READ DOCS
-          </button>
-          <button className="btn-secondary large">
-            JOIN DISCORD
-          </button>
+          </a>
         </div>
 
         <div className="social-links">
@@ -610,18 +617,10 @@ function Footer() {
         </div>
 
         <div className="footer-links">
-          <button type="button" className="link-button">
-            Documentation
-          </button>
-          <button type="button" className="link-button">
-            GitHub
-          </button>
-          <button type="button" className="link-button">
-            Discord
-          </button>
-          <button type="button" className="link-button">
-            Twitter
-          </button>
+          <a className="link-button" href="https://github.com/ShadowChainCorp/ShadowChain" target="_blank" rel="noopener noreferrer">Documentation</a>
+          <a className="link-button" href="https://github.com/ShadowChainCorp/ShadowChain" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <button type="button" className="link-button">Discord</button>
+          <button type="button" className="link-button">Twitter</button>
         </div>
 
         <div className="footer-bottom">
