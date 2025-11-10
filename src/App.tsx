@@ -1,86 +1,64 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { Navigate, Outlet, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import headerLogo from './assets/shadowlogo.png';
+import PoHBackground from './components/PoHBackground';
 import { apiPath } from './config';
-import { useChainMetrics } from './hooks/useChainMetrics';
+import { ChainMetrics, useChainMetrics } from './hooks/useChainMetrics';
 import { useWebSocket } from './hooks/useWebSocket';
 import Bridge from './pages/Bridge';
 import Consensus from './pages/Consensus';
 import Dashboard from './pages/Dashboard';
 import Landing from './pages/Landing';
+import PoHPreview from './pages/PoHPreview';
 import Privacy from './pages/Privacy';
 import Transactions from './pages/Transactions';
 import Validators from './pages/Validators';
 import Wallet from './pages/Wallet';
 import './shadow-theme.css';
 
-type Page = 'dashboard' | 'consensus' | 'privacy' | 'transactions' | 'wallet' | 'validators' | 'bridge';
-
 const NODE_API_LINK = apiPath('/shadow/info');
 
-function App() {
-  const [showLanding, setShowLanding] = useState(true);
-  const [currentPage, setCurrentPage] = useState<Page>('dashboard');
+const NAV_ITEMS = [
+  { path: '/dashboard', icon: 'DASH', label: 'Dashboard' },
+  { path: '/consensus', icon: 'POH', label: 'Consensus' },
+  { path: '/privacy', icon: 'PRIV', label: 'Privacy Pool' },
+  { path: '/transactions', icon: 'TX', label: 'Transactions' },
+  { path: '/wallet', icon: 'WALL', label: 'Wallet' },
+  { path: '/validators', icon: 'VAL', label: 'Validators' },
+  { path: '/bridge', icon: 'BRDG', label: 'Bridge' },
+];
+
+interface AppLayoutProps {
+  metrics: ChainMetrics | null;
+  loading: boolean;
+}
+
+const AppLayout = ({ metrics, loading }: AppLayoutProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { metrics, loading } = useChainMetrics();
-  const events = useWebSocket();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  // Check if user has visited before
-  useEffect(() => {
-    const hasVisited = localStorage.getItem('shadowchain_visited');
-    if (hasVisited) {
-      setShowLanding(false);
-    }
-  }, []);
-
-  const handleLaunchApp = () => {
-    localStorage.setItem('shadowchain_visited', 'true');
-    setShowLanding(false);
-  };
-
-  const handleReturnToLanding = () => {
-    setShowLanding(true);
-    setMobileMenuOpen(false);
-  };
-
-  // Show landing page
-  if (showLanding) {
-    return <Landing onLaunch={handleLaunchApp} />;
-  }
-
-  const formatNumber = (num: number | undefined) => {
-    if (!num) return '0';
+  const formatNumber = (num: number | null | undefined) => {
+    if (!num && num !== 0) return '0';
     return num.toLocaleString();
   };
 
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'dashboard':
-        return <Dashboard metrics={metrics} events={events} />;
-      case 'consensus':
-        return <Consensus metrics={metrics} />;
-      case 'privacy':
-        return <Privacy metrics={metrics} />;
-      case 'transactions':
-        return <Transactions />;
-      case 'wallet':
-        return <Wallet />;
-      case 'validators':
-        return <Validators />;
-      case 'bridge':
-        return <Bridge />;
-      default:
-        return <Dashboard metrics={metrics} events={events} />;
-    }
-  };
-
-  const handleNavigation = (page: Page) => {
-    setCurrentPage(page);
+  const handleNavigation = (path: string) => {
+    navigate(path);
     setMobileMenuOpen(false);
   };
 
+  const handleReturnToLanding = () => {
+    setMobileMenuOpen(false);
+    navigate('/');
+  };
+
+  const shieldedRatio = metrics
+    ? ((metrics.shielded_txs / Math.max(1, metrics.total_transactions)) * 100).toFixed(1)
+    : '0';
+
   return (
     <div className="app-container">
-      {/* Header */}
       <header className="app-header">
         <div className="header-left">
           <button
@@ -111,15 +89,9 @@ function App() {
             aria-controls="app-sidebar"
             onClick={() => setMobileMenuOpen(open => !open)}
           >
-            {mobileMenuOpen ? (
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 6l12 12M6 18L18 6" stroke="#00d4ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            ) : (
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 6h18M3 12h18M3 18h18" stroke="#00d4ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            )}
+            <span></span>
+            <span></span>
+            <span></span>
           </button>
         </div>
 
@@ -139,69 +111,25 @@ function App() {
         </div>
       </header>
 
-      {/* Main Layout */}
       <div className="main-layout">
-        {/* Sidebar */}
         <aside id="app-sidebar" className={`sidebar ${mobileMenuOpen ? 'open' : ''}`}>
           <nav className="sidebar-nav">
-            <button
-              className={`nav-item ${currentPage === 'dashboard' ? 'active' : ''}`}
-              onClick={() => handleNavigation('dashboard')}
-            >
-              <span className="nav-icon">DASH</span>
-              <span>Dashboard</span>
-            </button>
-            <button
-              className={`nav-item ${currentPage === 'consensus' ? 'active' : ''}`}
-              onClick={() => handleNavigation('consensus')}
-            >
-              <span className="nav-icon">POH</span>
-              <span>Consensus</span>
-            </button>
-            <button
-              className={`nav-item ${currentPage === 'privacy' ? 'active' : ''}`}
-              onClick={() => handleNavigation('privacy')}
-            >
-              <span className="nav-icon">PRIV</span>
-              <span>Privacy Pool</span>
-            </button>
-            <button
-              className={`nav-item ${currentPage === 'transactions' ? 'active' : ''}`}
-              onClick={() => handleNavigation('transactions')}
-            >
-              <span className="nav-icon">TX</span>
-              <span>Transactions</span>
-            </button>
-            <button
-              className={`nav-item ${currentPage === 'wallet' ? 'active' : ''}`}
-              onClick={() => handleNavigation('wallet')}
-            >
-              <span className="nav-icon">WALL</span>
-              <span>Wallet</span>
-            </button>
-            <button
-              className={`nav-item ${currentPage === 'validators' ? 'active' : ''}`}
-              onClick={() => handleNavigation('validators')}
-            >
-              <span className="nav-icon">VAL</span>
-              <span>Validators</span>
-            </button>
-            <button
-              className={`nav-item ${currentPage === 'bridge' ? 'active' : ''}`}
-              onClick={() => handleNavigation('bridge')}
-            >
-              <span className="nav-icon">BRDG</span>
-              <span>Bridge</span>
-            </button>
+            {NAV_ITEMS.map(item => (
+              <button
+                key={item.path}
+                className={`nav-item ${location.pathname === item.path ? 'active' : ''}`}
+                onClick={() => handleNavigation(item.path)}
+              >
+                <span className="nav-icon">{item.icon}</span>
+                <span>{item.label}</span>
+              </button>
+            ))}
           </nav>
 
-          {/* Quick Stats */}
           <div className="sidebar-stats">
             <div className="quick-stat">
               <div className="quick-stat-label">Shielded Ratio</div>
-              <div className="quick-stat-value">
-                {metrics ? ((metrics.shielded_txs / Math.max(1, metrics.total_transactions)) * 100).toFixed(1) : '0'}%
-              </div>
+              <div className="quick-stat-value">{shieldedRatio}%</div>
             </div>
             <div className="quick-stat">
               <div className="quick-stat-label">Pool Size</div>
@@ -214,7 +142,6 @@ function App() {
           </div>
         </aside>
 
-        {/* Main Content */}
         <main className="main-content">
           {loading ? (
             <div className="loading-screen">
@@ -222,12 +149,11 @@ function App() {
               <p>Loading ShadowChain...</p>
             </div>
           ) : (
-            renderPage()
+            <Outlet />
           )}
         </main>
       </div>
 
-      {/* Footer */}
       <footer className="app-footer">
         <div className="footer-left">
           <span>SHADOWCHAIN v1.0.0</span>
@@ -236,7 +162,7 @@ function App() {
         </div>
         <div className="footer-right">
           <button
-            onClick={() => setCurrentPage('wallet')}
+            onClick={() => handleNavigation('/wallet')}
             style={{ background: 'transparent', border: 'none', color: 'var(--accent-cyan)', cursor: 'pointer', textDecoration: 'none' }}
           >
             Faucet
@@ -246,6 +172,44 @@ function App() {
         </div>
       </footer>
     </div>
+  );
+};
+
+const LandingRoute = () => {
+  const navigate = useNavigate();
+
+  const handleLaunchApp = () => {
+    localStorage.setItem('shadowchain_visited', 'true');
+    navigate('/dashboard');
+  };
+
+  return (
+    <>
+      <PoHBackground />
+      <Landing onLaunch={handleLaunchApp} />
+    </>
+  );
+};
+
+function App() {
+  const { metrics, loading } = useChainMetrics();
+  const events = useWebSocket();
+
+  return (
+    <Routes>
+      <Route path="/" element={<LandingRoute />} />
+      <Route path="/poh" element={<PoHPreview />} />
+      <Route element={<AppLayout metrics={metrics} loading={loading} />}>
+        <Route path="/dashboard" element={<Dashboard metrics={metrics} events={events} />} />
+        <Route path="/consensus" element={<Consensus metrics={metrics} />} />
+        <Route path="/privacy" element={<Privacy metrics={metrics} />} />
+        <Route path="/transactions" element={<Transactions />} />
+        <Route path="/wallet" element={<Wallet />} />
+        <Route path="/validators" element={<Validators />} />
+        <Route path="/bridge" element={<Bridge />} />
+      </Route>
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
 

@@ -2676,6 +2676,56 @@ body {
   overflow-x: hidden;
   /* use the Refinery font for the landing page when available */
   font-family: 'Refinery', 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  /* contain the full-page PoH background */
+  position: relative;
+  isolation: isolate;
+}
+
+.landing::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.65) 0%,
+    rgba(0, 0, 0, 0.85) 45%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.matrix-bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #01060d;
+  color: var(--accent-cyan);
+  font-family: 'Monaco', 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: clamp(0.975rem, 1.125vw, 1.35rem);
+  letter-spacing: 0.03em;
+  line-height: 1.05;
+  white-space: pre;
+  padding: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.55;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.35);
+  text-align: left;
+}
+
+.landing-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Keep landing sections transparent so the animated Matrix background
+   stays visible, while scoping the effect to the landing page only. */
+.landing .section {
+  background: transparent;
+  border-top: 1px solid rgba(26, 26, 36, 0.6);
 }
 
 /* Force Refinery on all landing page text so headings, paragraphs, and
@@ -2698,26 +2748,57 @@ body {
 }
 
 .poh-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  opacity: 0.1;
+  /* fixed so the PoH glitch covers the entire viewport */
+  position: fixed;
+  inset: 0;
+  /* use CSS columns so the hash lines flow across the viewport in many columns
+     which makes the hashes cover left-to-right. Column width controls the
+     density; column-gap controls spacing between columns. */
+  column-width: 240px;
+  column-gap: 48px;
+  column-fill: auto;
+  /* a bit more visible now that large sections are semi-transparent */
+  opacity: 0.18;
   font-family: 'Monaco', monospace;
   font-size: 0.8rem;
   overflow: hidden;
   pointer-events: none;
-  padding-top: 2rem;
+  padding: 2rem 3rem;
+  z-index: 0;
 }
 
 .hash-line {
+  display: block;
+  /* ensure each hash occupies its own line in the column flow */
   color: var(--accent-cyan);
   white-space: nowrap;
-  padding: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  /* prevent individual lines from breaking across columns */
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  width: 100%;
+}
+
+/* Make columns denser on smaller viewports */
+@media (max-width: 1200px) {
+  .poh-background {
+    column-width: 200px;
+    column-gap: 36px;
+    padding: 1.5rem 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .poh-background {
+    column-width: 140px;
+    column-gap: 18px;
+    padding: 1rem 1rem;
+  }
+
+  .hash-line {
+    font-size: 0.85rem;
+  }
 }
 
 .hero-content {
@@ -2867,6 +2948,9 @@ body {
 .section {
   padding: 6rem 2rem;
   border-top: 1px solid var(--border-default);
+  /* ensure sections appear above the PoH background */
+  position: relative;
+  z-index: 1;
 }
 
 .section-content {
@@ -2888,7 +2972,7 @@ body {
 
 /* Problem Section */
 .problem-section {
-  background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-card) 100%);
+  background: transparent;
 }
 
 .problem-grid {
@@ -2944,7 +3028,7 @@ body {
 
 /* Solution Section */
 .solution-section {
-  background: var(--bg-card);
+  background: transparent;
 }
 
 .solution-content {
@@ -3069,7 +3153,7 @@ blockquote {
 
 /* How It Works Section */
 .how-it-works-section {
-  background: var(--bg-primary);
+  background: transparent;
 }
 
 .architecture-grid {
@@ -3258,7 +3342,7 @@ blockquote {
 
 /* Privacy Section */
 .privacy-section {
-  background: var(--bg-card);
+  background: transparent;
 }
 
 .guarantees-grid {
@@ -3360,7 +3444,7 @@ blockquote {
 
 /* Use Cases Section */
 .use-cases-section {
-  background: var(--bg-primary);
+  background: transparent;
 }
 
 .use-cases-grid {
@@ -3401,7 +3485,7 @@ blockquote {
 
 /* Tech Specs Section */
 .tech-specs-section {
-  background: var(--bg-card);
+  background: transparent;
 }
 
 .specs-grid {
@@ -3452,7 +3536,7 @@ blockquote {
 
 /* Comparison Section */
 .comparison-section {
-  background: var(--bg-primary);
+  background: transparent;
 }
 
 .comparison-table-wrapper {
@@ -3516,7 +3600,7 @@ blockquote {
 
 /* CTA Section */
 .cta-section {
-  background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-card) 100%);
+  background: transparent;
   text-align: center;
 }
 

@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
 import logo from '../assets/shadowlogo.png';
+import MatrixText from '../components/matrixbg';
 
 interface LandingProps {
   onLaunch: () => void;
@@ -8,17 +8,20 @@ interface LandingProps {
 export default function Landing({ onLaunch }: LandingProps) {
   return (
     <div className="landing">
-      <Hero onLaunch={onLaunch} />
-      <Problem />
-      <Solution />
-      <Features />
-      <HowItWorks />
-      <Privacy />
-      <UseCases />
-      <TechSpecs />
-      <Comparison />
-      <CTA onLaunch={onLaunch} />
-      <Footer />
+      <MatrixText />
+      <div className="landing-content">
+        <Hero onLaunch={onLaunch} />
+        <Problem />
+        <Solution />
+        <Features />
+        <HowItWorks />
+        <Privacy />
+        <UseCases />
+        <TechSpecs />
+        <Comparison />
+        <CTA onLaunch={onLaunch} />
+        <Footer />
+      </div>
     </div>
   );
 }
@@ -26,7 +29,6 @@ export default function Landing({ onLaunch }: LandingProps) {
 function Hero({ onLaunch }: { onLaunch: () => void }) {
   return (
     <section className="hero">
-      <PoHBackground />
 
       <div className="hero-content">
         <div className="hero-logo">
@@ -35,7 +37,7 @@ function Hero({ onLaunch }: { onLaunch: () => void }) {
         </div>
 
         <p className="hero-tagline">
-          Privacy-Native Blockchain for the Shadows
+          Privacy-Native Blockchain for the Anons
         </p>
 
         <p className="hero-subtitle">
@@ -65,37 +67,7 @@ function Hero({ onLaunch }: { onLaunch: () => void }) {
   );
 }
 
-function PoHBackground() {
-  const [hashes, setHashes] = useState<string[]>([]);
-
-  useEffect(() => {
-    const generateHash = () => {
-      return Array.from({ length: 16 }, () =>
-        Math.floor(Math.random() * 16).toString(16)
-      ).join('');
-    };
-
-    const interval = setInterval(() => {
-      setHashes(prev => [generateHash(), ...prev.slice(0, 20)]);
-    }, 400);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div className="poh-background">
-      {hashes.map((hash, i) => (
-        <div
-          key={i}
-          className="hash-line"
-          style={{ opacity: 1 - (i * 0.05) }}
-        >
-          {hash}
-        </div>
-      ))}
-    </div>
-  );
-}
+/* PoHBackground moved to src/components/PoHBackground.tsx */
 
 function Problem() {
   const problems = [
@@ -123,8 +95,8 @@ function Problem() {
         <div className="problem-statement">
           <p>
             Every transaction on Solana, Ethereum, and most blockchains is
-            <strong> COMPLETELY PUBLIC</strong>. This isn't just inconvenient —
-            <strong> it's dangerous</strong>.
+            <strong> COMPLETELY PUBLIC</strong>. Every wallet, payment, and interaction is visible to anyone who looks.
+            Privacy doesn't exist.
           </p>
         </div>
       </div>
