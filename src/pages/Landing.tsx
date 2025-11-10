@@ -50,7 +50,7 @@ function Hero({ onLaunch }: { onLaunch: () => void }) {
           </button>
           <a
             className="btn-secondary"
-            href="https://github.com/ShadowChainCorp/ShadowChain.git"
+            href="https://github.com/ShadowChain-ops/ShadowChain"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -585,7 +585,7 @@ function CTA({ onLaunch }: { onLaunch: () => void }) {
           </button>
           <a
             className="btn-secondary large"
-            href="https://github.com/ShadowChainCorp/ShadowChain.git"
+            href="https://github.com/ShadowChain-ops/ShadowChain"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -594,7 +594,7 @@ function CTA({ onLaunch }: { onLaunch: () => void }) {
         </div>
 
         <div className="social-links">
-          <a className="link-button" href="https://github.com/ShadowChainCorp/ShadowChain.git" target="_blank" rel="noopener noreferrer">★ Star on GitHub</a>
+          <a className="link-button" href="https://github.com/ShadowChain-ops/ShadowChain" target="_blank" rel="noopener noreferrer">★ Star on GitHub</a>
           <span>•</span>
           <button type="button" className="link-button">
             ◦ Follow on Twitter
@@ -615,8 +615,8 @@ function Footer() {
         </div>
 
         <div className="footer-links">
-          <a className="link-button" href="https://github.com/ShadowChainCorp/ShadowChain.git" target="_blank" rel="noopener noreferrer">Documentation</a>
-          <a className="link-button" href="https://github.com/ShadowChainCorp/ShadowChain.git" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a className="link-button" href="https://github.com/ShadowChain-ops/ShadowChain" target="_blank" rel="noopener noreferrer">Documentation</a>
+          <a className="link-button" href="https://github.com/ShadowChain-ops/ShadowChain" target="_blank" rel="noopener noreferrer">GitHub</a>
           <button type="button" className="link-button">Twitter</button>
         </div>
 
